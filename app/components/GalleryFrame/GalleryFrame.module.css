@@ -1,0 +1,27 @@
+.galleryFrame {
+    width: 100%;
+    height: 100%;
+
+    background-color: color-mix(in srgb, var(--dark-color) 80%, transparent);
+
+    display: flex;
+    gap: calc(var(--index) * 2);
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+
+    transition: opacity 750ms var(--transition-function);
+    transform-style: preserve-3d;
+    will-change: translate, opacity;
+}
+.dark {
+
+}
+.light {
+
+}
+.galleryFrame:nth-child(2n) {
+    flex-direction: row-reverse;
+}

@@ -1,0 +1,17 @@
+.inFrameImage {
+    width: calc(var(--image-width) * var(--index) * 8);
+    height: calc(var(--image-height) * var(--index) * 8);
+    margin-inline: calc(var(--image-width) * var(--index) * 0.5);
+
+    border-width: 5px;
+    border-style: solid;
+    border-radius: var(--standard-border-radius);
+    outline-width: 2px;
+    outline-style: solid;
+}
+.dark {
+    outline-color: var(--light-color);
+}
+.light {
+    outline-color: var(--dark-color);
+}

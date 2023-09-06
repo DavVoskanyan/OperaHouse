@@ -1,3 +1,23 @@
+:root {
+  --depth: 2000px;
+  --index: calc(1vw + 1vh);
+  --gap: 30px;
+
+  --image-width: 2;
+  --image-height: 3;
+  --last-image-width: 5;
+  --last-image-height: 3;
+
+  --standard-border-radius: 15px;
+
+  --dark-color: #050505;
+  --light-color: #e3e3e3;
+
+  --transition-function: cubic-bezier(.1,.65,0,1);
+}
+
+::-webkit-scrollbar { width: 0; opacity: 0; }
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -6,7 +26,10 @@
 html,
 body {
   max-width: 100vw;
+  height: var(--depth);
+  background-color: var(--dark-color);
   overflow-x: hidden;
+  scroll-behavior: unset;
 }
 a {
   color: inherit;

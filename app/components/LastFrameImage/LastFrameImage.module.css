@@ -1,0 +1,18 @@
+.lastFrameImage {
+    width: calc(var(--last-image-width) * var(--index) * 13);
+    height: calc(var(--last-image-height) * var(--index) * 13);
+
+    border-width: 5px;
+    border-style: solid;
+    border-radius: var(--standard-border-radius);
+    outline-width: 2px;
+    outline-style: solid;
+
+    object-fit: fill;
+}
+.dark {
+    outline-color: var(--light-color);
+}
+.light {
+    outline-color: var(--dark-color);
+}

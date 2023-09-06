@@ -1,0 +1,13 @@
+.inFrameParagraph {
+    width: calc(var(--image-width) * var(--index) * 9);
+
+    font-size: calc(var(--index) * .8);
+    font-weight: 200;
+    line-height: calc(var(--index) * 1.5);
+}
+.dark {
+    color: var(--light-color);
+}
+.light {
+    color: var(--dark-color);
+}

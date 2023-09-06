@@ -1,0 +1,14 @@
+.inFrameTitle {
+    width: calc(var(--image-width) * var(--index) * 9);
+
+    font-size: calc(var(--index) * 3);
+    font-weight: 300;
+    text-transform: capitalize;
+    line-height: calc(var(--index) * 4);
+}
+.dark {
+    color: var(--light-color);
+}
+.light {
+    color: var(--dark-color);
+}
