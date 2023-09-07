@@ -12,10 +12,13 @@
     right: 20px;
     bottom: 20px;
 
-    transition: scale var(--transition-standard-duration);
+    transition-duration: var(--transition-standard-duration);
     cursor: pointer;
 }
-.changeThemeButton:hover { scale: 1.1 1.1; }
+.changeThemeButton:hover {
+    border-radius: 50%;
+}
+
 .dark {
     background-color: var(--light-color);
     outline-color: var(--light-color);

@@ -1,5 +1,5 @@
 :root {
-  --depth: 242dvh;
+  --depth: calc(var(--index) * 88);
   --index: calc(1vw + 1vh);
   --gap: 30px;
 

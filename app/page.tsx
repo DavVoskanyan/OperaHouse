@@ -71,7 +71,7 @@ export default function Home(): JSX.Element {
             let lastPosition: number = zSpacing / 5;
             const top: number = document.documentElement.scrollTop;
             const delta: number = lastPosition - top;
-            lastPosition = top;
+            // lastPosition = top;
 
             const newZValues: Array<number> =
                 framesArray.map((frame: FrameObject, index: number): number => (index + 1) * zSpacing + delta * -5);
