@@ -6,8 +6,10 @@
     border-width: 5px;
     border-style: solid;
     border-radius: var(--standard-border-radius);
-    outline-width: 2px;
+    outline-width: 1px;
     outline-style: solid;
+
+    object-fit: cover;
 }
 .dark {
     outline-color: var(--light-color);

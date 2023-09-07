@@ -1,5 +1,5 @@
 :root {
-  --depth: 2000px;
+  --depth: 242dvh;
   --index: calc(1vw + 1vh);
   --gap: 30px;
 
@@ -11,8 +11,9 @@
   --standard-border-radius: 15px;
 
   --dark-color: #050505;
-  --light-color: #e3e3e3;
+  --light-color: #fafafa;
 
+  --transition-standard-duration: 250ms;
   --transition-function: cubic-bezier(.1,.65,0,1);
 }
 
@@ -27,7 +28,6 @@ html,
 body {
   max-width: 100vw;
   height: var(--depth);
-  background-color: var(--dark-color);
   overflow-x: hidden;
   scroll-behavior: unset;
 }

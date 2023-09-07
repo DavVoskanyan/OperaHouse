@@ -1,14 +1,10 @@
 import {JSX} from "react";
 import Image from "next/image";
 import {classNameGenerator} from "../../utils/utils";
+import {InFrameImageProps} from "@/app/utils/types";
 import styles from "./InFrameImage.module.css";
 
-type propsType = {
-    imageFileName: string,
-    theme: "dark" | "light";
-}
-
-export default function InFrameImage({imageFileName, theme}: propsType): JSX.Element {
+export default function InFrameImage({imageFileName, theme}: InFrameImageProps): JSX.Element {
     return (
         <Image
             className={classNameGenerator(styles.inFrameImage, styles[theme])}

@@ -1,18 +1,12 @@
 import {JSX} from "react";
 import {classNameGenerator} from "@/app/utils/utils";
+import type {GalleryFrameProps} from "@/app/utils/types";
 import styles from "./GalleryFrame.module.css";
 
-type propsType = {
-    theme: "dark" | "light",
-    children: JSX.Element | Array<JSX.Element>,
-    zValue: number,
-    opacity: 0 | 1;
-}
-
-export default function GalleryFrame({theme, children, zValue, opacity}: propsType): JSX.Element {
-    const styleObject = {
+export default function GalleryFrame({theme, children, zValue, isVisible}: GalleryFrameProps): JSX.Element {
+    const styleObject: typeof styles = {
         translate: `0 0 ${zValue}px`,
-        opacity: opacity
+        opacity: isVisible.toString(),
     }
 
     return (

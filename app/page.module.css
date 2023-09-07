@@ -4,6 +4,10 @@
     position: fixed;
     perspective: 1500px;
 }
+
+.dark { background-color: var(--dark-color); }
+.light { background-color: var(--light-color); }
+
 .container {
     height: 100%;
     transform-style: preserve-3d;

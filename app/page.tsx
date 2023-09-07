@@ -1,27 +1,40 @@
 "use client";
 
-import {JSX, useEffect, useState} from "react";
-
+import {Dispatch, JSX, SetStateAction, useEffect, useState} from "react";
 import framesInfo from "@/public/framesInfo.json";
-
+import {isVisible, setThemeInLocalStorage, getThemeFromLocalStorage, classNameGenerator} from "@/app/utils/utils";
+import {FrameObject, Theme} from "@/app/utils/types";
 import GalleryFrame from "@/app/components/GalleryFrame/GalleryFrame";
 import InFrameImage from "@/app/components/InFrameImage/InFrameImage";
 import InFrameParagraph from "@/app/components/InFrameParagraph/InFrameParagraph";
 import LastFrameImage from "@/app/components/LastFrameImage/LastFrameImage";
 import InFrameTitle from "@/app/components/InFrameTitle/InFrameTitle";
-
 import styles from "./page.module.css";
+import ChangeThemeButton from "@/app/components/ChangeThemeButton/ChangeThemeButton";
 
 export default function Home(): JSX.Element {
+    const [theme, changeTheme]: [Theme, Dispatch<SetStateAction<Theme>>] = useState(getThemeFromLocalStorage());
+    function themeChanger(currentTheme: Theme): void {
+        if(currentTheme === "dark") {
+            changeTheme("light");
+            setThemeInLocalStorage("light");
+        }
+        else {
+            changeTheme("dark");
+            setThemeInLocalStorage("dark");
+        }
+
+    }
+
     function generateFrameContent(
         index: number, arrayLength: number,
         imageFileName: string,
         paragraphText: string,
-        theme: "dark" | "light"): JSX.Element {
+        theme: Theme): JSX.Element {
 
         if(index === arrayLength - 1) {
             return (
-                <LastFrameImage imageFileName={imageFileName} theme={"dark"}/>
+                <LastFrameImage imageFileName={imageFileName} theme={theme}/>
             );
         }
         if(index === 0) {
@@ -29,10 +42,10 @@ export default function Home(): JSX.Element {
                 <>
                     <InFrameImage
                         imageFileName={imageFileName}
-                        theme={"dark"}/>
+                        theme={theme}/>
                     <InFrameTitle
                         paragraphText={paragraphText}
-                        theme={"dark"}/>
+                        theme={theme}/>
                 </>
             );
         }
@@ -40,27 +53,20 @@ export default function Home(): JSX.Element {
             <>
                 <InFrameImage
                     imageFileName={imageFileName}
-                    theme={"dark"}/>
+                    theme={theme}/>
                 <InFrameParagraph
                     paragraphText={paragraphText}
-                    theme={"dark"}/>
+                    theme={theme}/>
             </>
         );
     }
-    function checkOpacity(zValue: number, zSpacing: number): boolean {
-        return zValue < Math.abs(zSpacing) / 1.3;
-    }
 
-    type frameObject = {
-        imageFileName: string,
-        paragraphText: string
-    }
-
-    const framesArray: Array<frameObject> = Array.from(framesInfo.frames)
+    const framesArray: Array<FrameObject> = Array.from(framesInfo.frames)
     const [zValuesArray, changeArray]: any = useState(framesArray.map((): number => 0));
     const zSpacing: number = -1000;
 
     useEffect(() => {
+
         const scrollHandler = (): void => {
             let lastPosition: number = zSpacing / 5;
             const top: number = document.documentElement.scrollTop;
@@ -68,7 +74,7 @@ export default function Home(): JSX.Element {
             lastPosition = top;
 
             const newZValues: Array<number> =
-                framesArray.map((frame: frameObject, index: number): number => (index + 1) * zSpacing + delta * -5);
+                framesArray.map((frame: FrameObject, index: number): number => (index + 1) * zSpacing + delta * -5);
             changeArray(newZValues);
         }
         scrollHandler();
@@ -77,10 +83,10 @@ export default function Home(): JSX.Element {
     }, [])
 
     return (
-        <main className={styles.main}>
+        <main className={classNameGenerator(styles.main, styles[theme])}>
             <div className={styles.container}>
                 {
-                    framesArray.map((frame: frameObject, index: number): JSX.Element => {
+                    framesArray.map((frame: FrameObject, index: number): JSX.Element => {
                         if(index === framesArray.length - 1) {
 
                         }
@@ -88,15 +94,15 @@ export default function Home(): JSX.Element {
                             <GalleryFrame
                                 key={index}
                                 zValue={index === framesArray.length - 1 ? zValuesArray[index] - 500 : zValuesArray[index]}
-                                opacity={checkOpacity(zValuesArray[index], zSpacing) ? 1 : 0}
-                                theme={"dark"}>
+                                isVisible={isVisible(zValuesArray[index], zSpacing) ? 1 : 0}
+                                theme={theme}>
 
                                 {generateFrameContent(
                                     index,
                                     framesArray.length,
                                     frame.imageFileName,
                                     frame.paragraphText,
-                                    "dark"
+                                    theme
                                 )}
 
                             </GalleryFrame>
@@ -104,6 +110,7 @@ export default function Home(): JSX.Element {
                     })
                 }
             </div>
+            <ChangeThemeButton theme={theme} changeTheme={themeChanger}/>
         </main>
     );
 }
