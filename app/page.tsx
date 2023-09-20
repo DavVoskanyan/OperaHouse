@@ -9,8 +9,9 @@ import InFrameImage from "@/app/components/InFrameImage/InFrameImage";
 import InFrameParagraph from "@/app/components/InFrameParagraph/InFrameParagraph";
 import LastFrameImage from "@/app/components/LastFrameImage/LastFrameImage";
 import InFrameTitle from "@/app/components/InFrameTitle/InFrameTitle";
-import styles from "./page.module.css";
 import ChangeThemeButton from "@/app/components/ChangeThemeButton/ChangeThemeButton";
+import FirstFrameImage from "@/app/components/FirstFrameImage/FirstFrameImage";
+import styles from "./page.module.css";
 
 export default function Home(): JSX.Element {
     const [theme, changeTheme]: [Theme, Dispatch<SetStateAction<Theme>>] = useState(getThemeFromLocalStorage());
@@ -25,7 +26,6 @@ export default function Home(): JSX.Element {
         }
 
     }
-
     function generateFrameContent(
         index: number, arrayLength: number,
         imageFileName: string,
@@ -40,7 +40,7 @@ export default function Home(): JSX.Element {
         if(index === 0) {
             return (
                 <>
-                    <InFrameImage
+                    <FirstFrameImage
                         imageFileName={imageFileName}
                         theme={theme}/>
                     <InFrameTitle
@@ -66,22 +66,19 @@ export default function Home(): JSX.Element {
     const zSpacing: number = -1000;
 
     useEffect(() => {
-
         const scrollHandler = (): void => {
             let lastPosition: number = zSpacing / 5;
             const top: number = document.documentElement.scrollTop;
             const delta: number = lastPosition - top;
-            // lastPosition = top;
 
-            const newZValues: Array<number> =
-                framesArray.map((frame: FrameObject, index: number): number => (index + 1) * zSpacing + delta * -5);
+            const newZValues: Array<number> = framesArray.map(
+                (frame: FrameObject, index: number): number => (index + 1) * zSpacing + delta * -5
+            );
             changeArray(newZValues);
         }
-        scrollHandler();
         window.addEventListener('scroll', scrollHandler);
         return () => window.removeEventListener('scroll', scrollHandler);
-    }, [])
-
+    }, []);
     return (
         <main className={classNameGenerator(styles.main, styles[theme])}>
             <div className={styles.container}>

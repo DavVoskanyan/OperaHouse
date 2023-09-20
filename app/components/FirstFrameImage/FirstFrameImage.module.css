@@ -1,4 +1,4 @@
-.inFrameImage {
+.firstFrameImage {
     width: calc(var(--image-width) * var(--index) * 8);
     height: calc(var(--image-height) * var(--index) * 8);
     margin-inline: calc(var(--image-width) * var(--index) * 0.5);
@@ -10,7 +10,6 @@
     outline-style: solid;
 
     object-fit: cover;
-    -webkit-user-drag: none;
 }
 .dark {
     outline-color: var(--light-color);

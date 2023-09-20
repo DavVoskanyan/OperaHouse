@@ -15,6 +15,6 @@ export function setThemeInLocalStorage(theme: Theme): void {
     localStorage.setItem('theme', theme);
 }
 export function getThemeFromLocalStorage(): Theme {
-    const fromLocalStorage: string | null = localStorage.getItem('theme');
+    const fromLocalStorage: string | null = window.localStorage.getItem('theme');
     return fromLocalStorage ? <Theme>fromLocalStorage : "dark";
 }
